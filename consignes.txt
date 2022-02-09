@@ -1,0 +1,38 @@
+1/ Singleton :
+Implémenter le design pattern singleton dans une classe comprenant une variable d'instance "count" initialisée à 0 et une méthode "increment" qui l'incrémente et renvoie la nouvelle valeur. Dans le controlleur, vous récuperez une instance du singleton dans 2 variables:
+
+$a = Singleton::getInstance();
+$b = Singleton::getInstance();
+
+Que vous passez ensuite en paramètre à votre vue où vous affichez via la méthod increment:
+{{ $a->increment() }}
+{{ $b->increment() }}
+{{ $a->increment() }}
+
+2/ Factory
+Créer une classe Factory (tq VoitureFactory ou Usine) créant des objets de classe Opel ou Renaud selon le paramètre. Gérer les cas d'erreurs.
+Ensuite, passez les objets à la vue qui affichera la classe de l'objet en question (get_class($object))
+Remarque : afin d'aller plus vite dans la suite, je vous conseille de créer une classe abstraite "Voiture" dont "Opel" et "Renault" sont les classes enfants (ie Opel extend Voiture).
+
+3/ Facade:
+Créer une Facade permettant par une methode "commander" de lancer
+a) La fabrication de la voiture dans une "Usine"
+b) Envoyer la voiture dans une "Concession" (un object ayant un attribut permettant de stocker des voitures (array))
+c) Créer une "Facture" de la voiture (donc Facture aura besoin de la voiture à un moment)
+"commander" renvoie les 3 instances Usine, Concession et Facture
+Dans la vue :
+On affiche l'Usine, la Concession avec la(les) voiture(s) et la Facture avec la(les) voiture(s) liées.
+Cela peut-être fait juste en affichant les classes des différents éléments ou en affichant des variables spécifiques (nom de la concession, prix de la voiture...)
+
+
+4/ Iteration:
+Créer une classe "Aggregation" comprenant un tableau de valeurs (Ex: [opel, renault]) et son Iterateur.
+Remarque : la classe "Concession" peut-être reprise car elle possède un tableau de voitures si vous avez suivi l'exercice précédent.
+Dans la vue, affichez toutes les valeurs de la liste grâce aux fonctions de l'itérateur.
+Attention, Blade n'ayant pas de boucle "while", il faut ici utiliser du php directement dans la vue (pas très propre) ou créer une méthode dans l'itérateur qui boucle sur les valeurs en utilisant "hasNext()" et "next()".
+
+
+5/ Observeur:
+Créer un sujet et 2 obverveurs qui lui sont rattaché.
+Les observeur auront une fonction display() renvoyant un texte indiquant le nombre de notifications reçues (Aucune, Updaté 1fois,...)
+Dans la vue, afficher le display() des deux observeur, changer le sujet, reafficher le display() des observeurs.
